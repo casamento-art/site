@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Presentes - Camylle & Leonardo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&family=Cormorant+Garamond:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --marsala: #8B2635;
+            --marsala-dark: #6B1E29;
+            --marsala-light: #A73A49;
+            --rose-gold: #E8B4B8;
+            --blush: #F5E6E8;
+            --cream: #FFF8F3;
+            --gold: #D4AF37;
+            --gold-light: #F4E5C2;
+            --charcoal: #2C2C2C;
+            --gray-light: #666666;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--marsala) 0%, var(--marsala-dark) 50%, #4A1520 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: fadeIn 1s ease;
+        }
+
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: var(--cream);
+            color: var(--marsala);
+            border: 2px solid var(--gold);
+            padding: 12px 24px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s;
+            z-index: 100;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .back-button:hover {
+            background: var(--gold);
+            color: var(--marsala-dark);
+            transform: translateX(-5px);
+        }
+
+        .header h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 64px;
+            color: var(--gold);
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .header p {
+            font-size: 20px;
+            color: var(--cream);
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        .category-section {
+            margin-bottom: 60px;
+            animation: slideUp 0.6s ease;
+        }
+
+        .category-title {
+            font-size: 32px;
+            color: var(--gold);
+            margin-bottom: 30px;
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .category-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        .gifts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .gift-card {
+            background: linear-gradient(135deg, var(--cream) 0%, var(--blush) 100%);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s;
+            border: 2px solid var(--gold);
+            position: relative;
+        }
+
+        .gift-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.4);
+        }
+
+        .gift-card.reserved {
+            opacity: 0.6;
+            filter: grayscale(100%);
+        }
+
+        .gift-card.reserved::before {
+            content: '✓ Reservado';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-15deg);
+            background: var(--marsala);
+            color: var(--gold);
+            padding: 10px 40px;
+            font-size: 24px;
+            font-weight: bold;
+            border: 3px solid var(--gold);
+            border-radius: 10px;
+            z-index: 10;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .gift-image {
+            width: 100%;
+            height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--blush) 0%, var(--rose-gold) 100%);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .gift-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .gift-card:hover .gift-image img {
+            transform: scale(1.1);
+        }
+
+        .gift-image i {
+            font-size: 80px;
+            color: var(--marsala);
+        }
+
+        .gift-content {
+            padding: 25px;
+        }
+
+        .gift-name {
+            font-size: 22px;
+            color: var(--marsala);
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .gift-description {
+            font-size: 14px;
+            color: var(--gray-light);
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .gift-price {
+            font-size: 24px;
+            color: var(--marsala);
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .gift-button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, var(--marsala) 0%, var(--marsala-dark) 100%);
+            color: var(--gold);
+            border: 2px solid var(--gold);
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+        }
+
+        .gift-button:hover:not(:disabled) {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(139, 38, 53, 0.4);
+        }
+
+        .gift-button:disabled {
+            background: var(--gray-light);
+            cursor: not-allowed;
+            border-color: var(--gray-light);
+        }
+
+        .pix-section {
+            background: linear-gradient(135deg, var(--cream) 0%, var(--blush) 100%);
+            border: 3px solid var(--gold);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            margin-top: 60px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .pix-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            color: var(--marsala);
+            margin-bottom: 20px;
+        }
+
+        .pix-section p {
+            font-size: 18px;
+            color: var(--charcoal);
+            margin-bottom: 30px;
+        }
+
+        .pix-info {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            display: inline-block;
+            border: 2px solid var(--rose-gold);
+        }
+
+        .pix-key {
+            font-size: 24px;
+            color: var(--marsala);
+            font-weight: bold;
+            margin: 15px 0;
+        }
+
+        .copy-button {
+            background: linear-gradient(135deg, var(--marsala) 0%, var(--marsala-dark) 100%);
+            color: var(--gold);
+            border: 2px solid var(--gold);
+            padding: 12px 30px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            margin-top: 15px;
+            transition: all 0.3s;
+        }
+
+        .copy-button:hover {
+            transform: scale(1.05);
+        }
+
+        /* Modal */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, var(--cream) 0%, var(--blush) 100%);
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            border: 3px solid var(--gold);
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            color: var(--marsala);
+            margin-bottom: 20px;
+        }
+
+        .modal-text {
+            font-size: 18px;
+            color: var(--charcoal);
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .modal-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid var(--rose-gold);
+            border-radius: 10px;
+            font-size: 16px;
+            margin-bottom: 20px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .modal-btn {
+            padding: 12px 30px;
+            background: linear-gradient(135deg, var(--marsala) 0%, var(--marsala-dark) 100%);
+            color: var(--gold);
+            border: 2px solid var(--gold);
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            text-transform: uppercase;
+            transition: all 0.3s;
+        }
+
+        .modal-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .modal-btn.cancel {
+            background: var(--gray-light);
+            border-color: var(--gray-light);
+            color: white;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 48px;
+            }
+
+            .gifts-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .back-button {
+                position: relative;
+                margin-bottom: 20px;
+                top: 0;
+                left: 0;
+            }
+
+            .category-title {
+                font-size: 28px;
+            }
+
+            .pix-section {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-button">
+        <i class="fas fa-arrow-left"></i> Voltar ao Convite
+    </a>
+
+    <div class="container">
+        <div class="header">
+            <h1>Lista de Presentes</h1>
+            <p>💕 Sua presença é nosso maior presente! 💕</p>
+            <p>Mas se quiser nos ajudar a montar nosso lar com carinho,<br>escolha um item abaixo:</p>
+        </div>
+
+        <!-- Cozinha -->
+        <div class="category-section">
+            <h2 class="category-title"><i class="fas fa-utensils"></i> Cozinha</h2>
+            <div class="gifts-grid">
+                <div class="gift-card" data-id="1">
+                    <div class="gift-image">
+                        <img src="https://images.unsplash.com/photo-1585515320310-259814833e62?w=500&h=500&fit=crop" alt="Liquidificador">
+                    </div>
+                    <div class="gift-content">
+                        <h3 class="gift-name">Liquidificador</h3>
+                        <p class="gift-description">Liquidificador potente para vitaminas e receitas deliciosas</p>
+                        <p class="gift-price">R$ 250,00</p>
+                        <button class="gift-button" onclick="reserveGift(1)">Presentear</button>
+                    </div>
+                </div>
+
+                <div class="gift-card" data-id="2">
+                    <div class="gift-image">
+                        <img src="https://images.unsplash.com/photo-1584990347449-39e4518c152a?w=500&h=500&fit=crop" alt="Jogo de Panelas">
+                    </div>
+                    <div class="gift-content">
+                        <h3 class="gift-name">Jogo de Panelas</h3>
+                        <p class="gift-description">Conjunto completo com 5 panelas antiaderentes</p>
+                        <p class="gift-price">R$ 450,00</p>
+                        <button class="gift-button" onclick="reserveGift(2)">Presentear</button>
+                    </div>
+                </div>
+
+                <div class="gift-card" data-id="3">
+                    <div class="gift-image">
+                        <img src="https://images.unsplash.com/photo-1593618998160-e34014e67546?w=500&h=500&fit=crop" alt="Jogo de Facas">
+                    </div>
+                    <div class="gift-content">
+                        <h3 class="gift-name">Jogo de Facas</h3>
+                        <p class="gift-description">Kit com 6 facas profissionais e suporte</p>
+                        <p class="gift-price">R$ 180,00</p>
+                        <button class="gift-button" onclick="reserveGift(3)">Presentear</button>
+                    </div>
+                </div>
+
+                <div class="gift-card" data-id="4">
+                    <div class="gift-image">
+                        <img src="https://images.unsplash.com/photo-1517668808822-9ebb02f2a0e6?w=500&h=500&fit=crop" alt="Cafeteira">
+                    </div>
+                    <div class="gift-content">
+                        <h3 class="gift-name">Cafeteira Elétrica</h3>
+                        <p class="gift-description">Para começar o dia com energia</p>
+                        <p class="gift-price">R$ 200,00</p>
+                        <button class="gift-button" onclick="reserveGift(4)">Presentear</button>
+                    </div>
+                </div>
+
+                <div class="gift-card" data-id="5">
+                    <div class="gift-image">
+                        <img src="https://images.unsplash.com/photo-1610701596007-11502861dcfa?w=500&h=500&fit=crop" alt="Jogo de Potes">
+                    </div>
+                    <div class="gift-content">
+                        <h3 class="gift-name">Jogo de Potes</h3>
+                        <p class="gift-description">10 potes de vidro para organização</p>
+                        <p class="gift-price">R$ 120,00</p>
+                        <button class="gift-button" onclick="reserveGift(5)">Presentear</button>
+                    </div>
+                </div>
+
+                <div class="gift-card" data-id="6">
+                    <div class="gift-image">
+                        <img src="https://images.unsplash.com/photo-1574269909862-7e1d70bb8078?w=500&h=500&fit=crop" alt="Micro-ondas">
+                    </div>
+                    <div class="gift-content">
+                        <h3 class="gift-name">Micro-ondas</h3>
+                        <p class="gift-description">30 litros com grill e timer digital</p>
+                        <p class="gift-price">R$ 550,00</p>
+                        <button class="gift-button" onclick="reserveGift(6)">Presentear</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mesa e Jantar -->
+        <div class="category-section">
+            <h2 class="category-title"><i class="fas fa-plate-wheat"></i> Mesa & Jantar</h2>
+            <div class="gifts-grid">
+                <div class="gift-card" data-id="7">
+                    <div class="gift-image">
+                        <img src="https://images.unsplash.com/photo-1578475691717-7ced1e5385c1?w=500&h=500&fit=crop" alt="Aparelho de Jantar">
+                    </div>
+                    <div class="gift-content">
+                        <h3 class="gift-name">Aparelho de Jantar</h3>
+                        <p class="gift-description">Conjunto completo para 6 pessoas - 30 peças</p>
+                        <p class="gift-price">R$ 380,00</p>
+                        <button class="gift-button" onclick="reserveGift(7)">Presentear</button>
+                    </div>
+                </div>
+
+                <div class="gift-card" data-id="8">
+                    <div class="gift-image">
+                        <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=500&h=500&fit=crop" alt="Jogo de Taças">
+                    </div>
+                    <div class="gift-content">
+                        <h3 class="gift-name">Jogo de Taças</h3>
+                        <p class="gift-description">12 taças de cristal (vinho, água e champagne)</p>
+                        <p class="gift-price">R$ 280,00</p>
+                        <button class="gift-button" onclick="reserveGift(8)">Presentear</button>
+                    </div>
+                </div>
+
+                <div class="gift-card" data-id="9">
+                    <div class="gift-image">
+                        <img src="https://images.unsplash.com/photo-1606676539940-12768ce0e762?w=500&h=500&fit=crop" alt="Faqueiro">
+                    </div>
+                    <div class="gift-content">
+                        <h3 class="gift-name">Faqueiro</h3>
+                        <p class="gift-description">Conjunto 42 peças em aço inox</p>
+                        <p class="gift-price">R$ 320,00</p>
+                        <button class="gift-button" onclick="reserveGift(9)">Presentear</button>
+                    </div>
+                </div>
+
+                <div class="gift-card" data-id="10">
+                    <div class="gift-image">
+                        <img src="https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=500&h=500&fit=crop" alt="Jogo de Xícaras">
+                    </div>
+                    <div class="gift-content">
+                        <h3 class="gift-name">Jogo de Xícaras</h3>
+                        <p class="gift-description">12 xícaras de porcelana com pires</p>
+                        <p class="gift-price">R$ 150,00</p>
+                        <button class="gift-button" onclick="reserveGift(10)">Presentear</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quarto -->
+        <div class="category-section">
+            <h2 class="category-title"><i class="fas fa-bed"></i> Quarto</h2>
+            <div class="gifts-grid">
+                <div class="gift-card" data-id="11">
+                    <div class="gift-image">
+                        <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=500&h=500&fit=crop" alt="Jogo de Lençóis">
+                    </div>
+                    <div class="gift-content">
+                        <h3 class="gift-name">Jogo de Lençóis</h3>
+                        <p class="gift-description">Casal, 300 fios, 4 peças</p>
+                        <p class="gift-price">R$ 280,00</p>
+                        <button class="gift-button" onclick="reserveGift(11)">Presentear</button>
+                    </div>
+                </div>
+
+                <div class="gift-card" data-id="12">
+                    <div class="gift-image">
+                        <img src="https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=500&h=500&fit=crop" alt="Edredom">
+                    </div>
+                    <div class="gift-content">
+                        <h3 class="gift-name">Edredom Casal</h3>
+                        <p class="gift-description">Edredom de plumas king size</p>
+                        <p class="gift-price">R$ 420,00</p>
+                        <button class="gift-button" onclick="reserveGift(12)">Presentear</button>
+                    </div>
+                </div>
+
+                <div class="gift-card" data-id="13">
+                    <div class="gift-image">
+                        <img src="https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=500&h=500&fit=crop" alt="Almofadas">
+                    </div>
+                    <div class="gift-content">
+                        <h3 class="gift-name">Jogo de Almofadas</h3>
+                        <p class="gift-description">4 almofadas decorativas</p>
+                        <p class="gift-price">R$ 180,00</p>
+                        <button class="gift-button" onclick="reserveGift(13)">Presentear</button>
+                    </div>
+                </div>
+
+                <div class="gift-card" data-id="14">
+                    <div class="gift-image">
+                        <img src="https://images.unsplash.com/photo-1509048191080-d2984bad6ae5?w=500&h=500&fit=crop" alt="Despertador">
+                    </div>
+                    <div class="gift-content">
+                        <h3 class="gift-name">Despertador Digital</h3>
+                        <p class="gift-description">Com bluetooth e carregador wireless</p>
+                        <p class="gift-price">R$ 150,00</p>
+                        <button class="gift-button" onclick="reserveGift(14)">Presentear</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Banho -->
+        <div class="category-section">
+            <h2 class="category-title"><i class="fas fa-bath"></i> Banho</h2>
+            <div class="gifts-grid">
+                <div class="gift-card" data-id="15">
+                    <div class="gift-image">
+                        <img src="https://images.unsplash.com/photo-1620062278173-34a99d711b5b?w=500&h=500&fit=crop" alt="Jogo de Toalhas">
+                    </div>
+                    <div class="gift-content">
+                        <h3 class="gift-name">Jogo de Toalhas</h3>
+                        <p class="gift-description">6 peças em algodão egípcio</p>
+                        <p class="gift-price">R$ 280,00</p>
+                        <button class="gift-button" onclick="reserveGift(15)">Presentear</button>
+                    </div>
+                </div>
+
+                <div class="gift-card" data-id="16">
+                    <div class="gift-image">
+                        <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=500&h=500&fit=crop" alt="Jogo de Banheiro">
+                    </div>
+                    <div class="gift-content">
+                        <h3 class="gift-name">Jogo de Banheiro</h3>
+                        <p class="gift-description">5 peças com tapetes e acessórios</p>
+                        <p class="gift-price">R$ 180,00</p>
+                        <button class="gift-button" onclick="reserveGift(16)">Presentear</button>
+                    </div>
+                </div>
+
+                <div class="gift-card" data-id="17">
+                    <div class="gift-image">
+                        <img src="https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=500&h=500&fit=crop" alt="Kit Acessórios">
+                    </div>
+                    <div class="gift-content">
+                        <h3 class="gift-name">Kit Acessórios</h3>
+                        <p class="gift-description">Saboneteira, porta-escova, dispenser</p>
+                        <p class="gift-price">R$ 120,00</p>
+                        <button class="gift-button" onclick="reserveGift(17)">Presentear</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Eletrodomésticos -->
+        <div class="category-section">
+            <h2 class="category-title"><i class="fas fa-plug"></i> Eletrodomésticos</h2>
+            <div class="gifts-grid">
+                <div class="gift-card" data-id="18">
+                    <div class="gift-image">
+                        <img src="https://images.unsplash.com/photo-1604902396830-aca29e19b067?w=500&h=500&fit=crop" alt="Ventilador">
+                    </div>
+                    <div class="gift-content">
+                        <h3 class="gift-name">Ventilador</h3>
+                        <p class="gift-description">Ventilador de coluna 50cm com controle</p>
+                        <p class="gift-price">R$ 280,00</p>
+                        <button class="gift-button" onclick="reserveGift(18)">Presentear</button>
+                    </div>
+                </div>
+
+                <div class="gift-card" data-id="19">
+                    <div class="gift-image">
+                        <img src="https://images.unsplash.com/photo-1582735689369-4fe89db7114c?w=500&h=500&fit=crop" alt="Ferro de Passar">
+                    </div>
+                    <div class="gift-content">
+                        <h3 class="gift-name">Ferro de Passar</h3>
+                        <p class="gift-description">Ferro a vapor com base de cerâmica</p>
+                        <p class="gift-price">R$ 180,00</p>
+                        <button class="gift-button" onclick="reserveGift(19)">Presentear</button>
+                    </div>
+                </div>
+
+                <div class="gift-card" data-id="20">
+                    <div class="gift-image">
+                        <img src="https://images.unsplash.com/photo-1558317374-067fb5f30001?w=500&h=500&fit=crop" alt="Aspirador">
+                    </div>
+                    <div class="gift-content">
+                        <h3 class="gift-name">Aspirador de Pó</h3>
+                        <p class="gift-description">1400W com filtro HEPA</p>
+                        <p class="gift-price">R$ 380,00</p>
+                        <button class="gift-button" onclick="reserveGift(20)">Presentear</button>
+                    </div>
+                </div>
+
+                <div class="gift-card" data-id="21">
+                    <div class="gift-image">
+                        <img src="https://images.unsplash.com/photo-1631545806609-c2568f1e6f2f?w=500&h=500&fit=crop" alt="Ar-condicionado">
+                    </div>
+                    <div class="gift-content">
+                        <h3 class="gift-name">Ar-condicionado</h3>
+                        <p class="gift-description">Split 12.000 BTUs inverter</p>
+                        <p class="gift-price">R$ 1.800,00</p>
+                        <button class="gift-button" onclick="reserveGift(21)">Presentear</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Decoração -->
+        <div class="category-section">
+            <h2 class="category-title"><i class="fas fa-palette"></i> Decoração</h2>
+            <div class="gifts-grid">
+                <div class="gift-card" data-id="22">
+                    <div class="gift-image">
+                        <img src="https://images.unsplash.com/photo-1513519245088-0e12902e35ca?w=500&h=500&fit=crop" alt="Quadros">
+                    </div>
+                    <div class="gift-content">
+                        <h3 class="gift-name">Quadros Decorativos</h3>
+                        <p class="gift-description">Kit com 3 quadros para sala</p>
+                        <p class="gift-price">R$ 250,00</p>
+                        <button class="gift-button" onclick="reserveGift(22)">Presentear</button>
+                    </div>
+                </div>
+
+                <div class="gift-card" data-id="23">
+                    <div class="gift-image">
+                        <img src="https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=500&h=500&fit=crop" alt="Vasos">
+                    </div>
+                    <div class="gift-content">
+                        <h3 class="gift-name">Vasos Decorativos</h3>
+                        <p class="gift-description">3 vasos de cerâmica com plantas</p>
+                        <p class="gift-price">R$ 180,00</p>
+                        <button class="gift-button" onclick="reserveGift(23)">Presentear</button>
+                    </div>
+                </div>
+
+                <div class="gift-card" data-id="24">
+                    <div class="gift-image">
+                        <img src="https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=500&h=500&fit=crop" alt="Luminária">
+                    </div>
+                    <div class="gift-content">
+                        <h3 class="gift-name">Luminária de Chão</h3>
+                        <p class="gift-description">Luminária moderna com luz regulável</p>
+                        <p class="gift-price">R$ 320,00</p>
+                        <button class="gift-button" onclick="reserveGift(24)">Presentear</button>
+                    </div>
+                </div>
+
+                <div class="gift-card" data-id="25">
+                    <div class="gift-image">
+                        <img src="https://images.unsplash.com/photo-1618220179428-22790b461013?w=500&h=500&fit=crop" alt="Espelho">
+                    </div>
+                    <div class="gift-content">
+                        <h3 class="gift-name">Espelho Grande</h3>
+                        <p class="gift-description">Espelho decorativo 120x80cm</p>
+                        <p class="gift-price">R$ 450,00</p>
+                        <button class="gift-button" onclick="reserveGift(25)">Presentear</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Seção PIX -->
+        <div class="pix-section">
+            <h2>💳 Prefere contribuir via PIX?</h2>
+            <p>Qualquer valor será muito bem-vindo e usado com carinho para nosso lar!</p>
+            <div class="pix-info">
+                <p><strong>Chave PIX (Telefone):</strong></p>
+                <p class="pix-key" id="pixKey">(98) 98888-8888</p>
+                <p><strong>Nome:</strong> Camylle & Leonardo</p>
+                <button class="copy-button" onclick="copyPix()">
+                    <i class="fas fa-copy"></i> Copiar Chave PIX
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <h3 class="modal-title" id="modalTitle">Confirmar Presente</h3>
+            <p class="modal-text" id="modalText">Por favor, informe seu nome para confirmar o presente:</p>
+            <input type="text" class="modal-input" id="guestName" placeholder="Seu nome completo">
+            <div class="modal-buttons">
+                <button class="modal-btn" onclick="confirmReservation()">Confirmar</button>
+                <button class="modal-btn cancel" onclick="closeModal()">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Load reserved gifts from localStorage
+        let reservedGifts = JSON.parse(localStorage.getItem('reservedGifts')) || {};
+
+        // Initialize page
+        window.addEventListener('load', () => {
+            updateGiftCards();
+        });
+
+        function updateGiftCards() {
+            Object.keys(reservedGifts).forEach(giftId => {
+                const card = document.querySelector(`[data-id="${giftId}"]`);
+                if (card) {
+                    card.classList.add('reserved');
+                    const button = card.querySelector('.gift-button');
+                    button.disabled = true;
+                    button.textContent = 'Já Reservado';
+                }
+            });
+        }
+
+        let currentGiftId = null;
+
+        function reserveGift(giftId) {
+            currentGiftId = giftId;
+            const card = document.querySelector(`[data-id="${giftId}"]`);
+            const giftName = card.querySelector('.gift-name').textContent;
+            
+            document.getElementById('modalTitle').textContent = '🎁 Presentear';
+            document.getElementById('modalText').textContent = `Você escolheu: ${giftName}\n\nPor favor, informe seu nome para confirmar:`;
+            document.getElementById('guestName').value = '';
+            document.getElementById('modal').classList.add('show');
+        }
+
+        function confirmReservation() {
+            const guestName = document.getElementById('guestName').value.trim();
+            
+            if (!guestName) {
+                alert('Por favor, informe seu nome!');
+                return;
+            }
+
+            // Save reservation
+            reservedGifts[currentGiftId] = {
+                guest: guestName,
+                date: new Date().toISOString()
+            };
+            localStorage.setItem('reservedGifts', JSON.stringify(reservedGifts));
+
+            // Update card
+            const card = document.querySelector(`[data-id="${currentGiftId}"]`);
+            card.classList.add('reserved');
+            const button = card.querySelector('.gift-button');
+            button.disabled = true;
+            button.textContent = 'Já Reservado';
+
+            closeModal();
+
+            // Show success message
+            document.getElementById('modalTitle').textContent = '✅ Presente Reservado!';
+            document.getElementById('modalText').textContent = `Obrigado, ${guestName}!\n\nSeu presente foi reservado com sucesso.\nEstamos muito felizes com sua generosidade! 💕`;
+            document.querySelector('.modal-input').style.display = 'none';
+            document.querySelector('.modal-buttons').innerHTML = '<button class="modal-btn" onclick="closeModal()">Fechar</button>';
+            document.getElementById('modal').classList.add('show');
+            
+            setTimeout(() => {
+                document.querySelector('.modal-input').style.display = 'block';
+                document.querySelector('.modal-buttons').innerHTML = `
+                    <button class="modal-btn" onclick="confirmReservation()">Confirmar</button>
+                    <button class="modal-btn cancel" onclick="closeModal()">Cancelar</button>
+                `;
+            }, 100);
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.remove('show');
+            currentGiftId = null;
+        }
+
+        function copyPix() {
+            const pixKey = document.getElementById('pixKey').textContent;
+            navigator.clipboard.writeText(pixKey).then(() => {
+                const button = event.target.closest('.copy-button');
+                const originalText = button.innerHTML;
+                button.innerHTML = '<i class="fas fa-check"></i> Copiado!';
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                }, 2000);
+            });
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('modal').addEventListener('click', (e) => {
+            if (e.target.id === 'modal') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Camylle & Leonardo - Convite de Casamento</title>
+    <title>Camylle & Leonardo - Chá de Casa Nova</title>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&family=Cormorant+Garamond:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -792,11 +792,23 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             transition: all 0.3s;
+            width: 100%;
         }
 
         .modal-btn:hover {
             transform: scale(1.05);
             box-shadow: 0 10px 30px rgba(139, 38, 53, 0.3);
+        }
+
+        #modalButtons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .modal-btn i {
+            margin-right: 8px;
         }
 
         /* Music Player */
@@ -1009,7 +1021,7 @@
                 
                 <h1 class="couple-names">Camylle & Leonardo</h1>
                 
-                <p class="date-display">18 • ABRIL • 2026</p>
+                <p class="date-display">14 • MARÇO • 2026</p>
                 
                 <div class="countdown-container" id="countdown">
                     <div class="countdown-box">
@@ -1050,36 +1062,10 @@
                     </div>
                     <h3 class="detail-title">Cerimônia</h3>
                     <p class="detail-info">
-                        Sábado, 10h30<br>
-                        Nome do Espaço<br>
-                        Endereço completo<br>
+                        Sábado, às 17h30<br>
+                        Piscina de Joana<br>
+                        Turilândia, Maranhão<br>
                         <small>Clique para detalhes</small>
-                    </p>
-                </div>
-                
-                <div class="detail-card" onclick="showReceptionDetails()">
-                    <div class="detail-icon">
-                        <i class="fas fa-champagne-glasses"></i>
-                    </div>
-                    <h3 class="detail-title">Recepção</h3>
-                    <p class="detail-info">
-                        Logo após a cerimônia<br>
-                        Kanpek Oriental Food<br>
-                        Buffet especial preparado<br>
-                        <small>Ver cardápio</small>
-                    </p>
-                </div>
-                
-                <div class="detail-card" onclick="showDressCode()">
-                    <div class="detail-icon">
-                        <i class="fas fa-black-tie"></i>
-                    </div>
-                    <h3 class="detail-title">Dress Code</h3>
-                    <p class="detail-info">
-                        Traje Esporte Fino<br>
-                        Paleta: Marsala & Nude<br>
-                        Evitem branco<br>
-                        <small>Ver inspirações</small>
                     </p>
                 </div>
                 
@@ -1195,7 +1181,9 @@
         <div class="modal-content">
             <h3 class="modal-title" id="modalTitle">Título</h3>
             <p class="modal-text" id="modalText">Conteúdo</p>
-            <button class="modal-btn" onclick="closeModal()">Fechar</button>
+            <div id="modalButtons">
+                <button class="modal-btn" onclick="closeModal()">Fechar</button>
+            </div>
         </div>
     </div>
 
@@ -1231,7 +1219,7 @@
 
         // Countdown Timer
         function startCountdown() {
-            const weddingDate = new Date('2026-04-18T10:30:00');
+            const weddingDate = new Date('2026-03-14T17:30:00');
             
             function updateCountdown() {
                 const now = new Date();
@@ -1332,9 +1320,22 @@
         sections.forEach(section => observer.observe(section));
 
         // Modal Functions
-        function showModal(title, text) {
+        function showModal(title, text, mapUrl) {
             document.getElementById('modalTitle').textContent = title;
             document.getElementById('modalText').textContent = text;
+            
+            const buttonsContainer = document.getElementById('modalButtons');
+            if (mapUrl) {
+                buttonsContainer.innerHTML = `
+                    <button class="modal-btn" style="background: linear-gradient(135deg, #4285F4 0%, #1a73e8 100%); margin-bottom: 10px;" onclick="window.open('${mapUrl}', '_blank')">
+                        <i class="fas fa-map-marked-alt"></i> Abrir no Google Maps
+                    </button>
+                    <button class="modal-btn" onclick="closeModal()">Fechar</button>
+                `;
+            } else {
+                buttonsContainer.innerHTML = '<button class="modal-btn" onclick="closeModal()">Fechar</button>';
+            }
+            
             document.getElementById('modal').classList.add('show');
         }
 
@@ -1345,26 +1346,27 @@
         // Interactive Functions
         function showLocation() {
             showModal('📍 Local da Cerimônia', 
-                'Nome do Espaço\nEndereço completo\nCidade, Estado\n\n' +
+                'Nome do Espaço: Piscina de Joana\nTurilândia, Maranhão\n\n' +
                 '🚗 Estacionamento disponível no local\n' +
-                '⏰ Chegue com 15 minutos de antecedência\n\n' +
-                'Clique no botão do Google Maps para traçar sua rota!');
+                '⏰ Chegue com 30 minutos de antecedência\n\n' +
+                'Clique no botão abaixo para abrir a localização no Google Maps!',
+                'https://maps.app.goo.gl/7FroXENVxg7rA49q8');
         }
 
         function addToCalendar() {
             showModal('📅 Salvar a Data', 
-                '💑 Casamento Camylle & Leonardo\n\n' +
-                '📆 Data: 18 de Abril de 2026\n' +
-                '🕙 Horário: 10h30\n' +
-                '📍 Local: Nome do Espaço\n\n' +
+                '🏠 Chá de casa nova Camylle & Leonardo\n\n' +
+                '📆 Data: 14 de Março de 2026\n' +
+                '🕙 Horário: 17h30\n' +
+                '📍 Local: Piscina de Joana\n\n' +
                 'Adicione ao seu calendário para não esquecer!');
         }
 
         function showCeremonyDetails() {
             showModal('💒 Detalhes da Cerimônia', 
                 'Nossa cerimônia será um momento íntimo e especial.\n\n' +
-                '⏰ Horário: 10h30 em ponto\n' +
-                '📍 Local: Nome do Espaço\n' +
+                '⏰ Horário: 17h30 em ponto\n' +
+                '📍 Local: Piscina de Joana\n' +
                 '🚗 Estacionamento: Disponível\n' +
                 '📸 Fotos: Permitidas (sem flash durante a cerimônia)\n' +
                 '👶 Crianças: Bem-vindas!\n\n' +
@@ -1411,21 +1413,7 @@
         }
 
         function showGiftList() {
-            showModal('🎁 Lista de Presentes', 
-                '💕 Sua presença é nosso maior presente!\n\n' +
-                'Mas se desejar nos presentear:\n\n' +
-                '🏠 LISTA DE CASAMENTO:\n' +
-                '• Lojas Americanas\n' +
-                '• Magazine Luiza\n' +
-                '• Código da lista: CL2026\n\n' +
-                '✈️ COTAS DE LUA DE MEL:\n' +
-                '• Passagens aéreas\n' +
-                '• Hospedagem\n' +
-                '• Experiências românticas\n\n' +
-                '💳 PIX PARA PRESENTES:\n' +
-                '• Chave: (00) 00000-0000\n' +
-                '• Nome: Camylle & Leonardo\n\n' +
-                'Agradecemos de coração! ❤️');
+            window.location.href = 'lista-presentes.html';
         }
 
         function openPhoto(index) {
