@@ -70,6 +70,31 @@
             transform: translateX(-5px);
         }
 
+        .admin-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--gold);
+            color: var(--marsala-dark);
+            border: 2px solid var(--cream);
+            padding: 12px 24px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s;
+            z-index: 100;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .admin-button:hover {
+            background: var(--cream);
+            color: var(--marsala);
+            transform: scale(1.05);
+        }
+
         .header h1 {
             font-family: 'Great Vibes', cursive;
             font-size: 64px;
@@ -154,6 +179,10 @@
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
         }
 
+        .gift-card.hidden {
+            display: none;
+        }
+
         .gift-image {
             width: 100%;
             height: 250px;
@@ -213,92 +242,99 @@
             color: var(--gold);
             border: 2px solid var(--gold);
             border-radius: 50px;
-            cursor: pointer;
             font-size: 16px;
-            font-weight: 500;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
             text-transform: uppercase;
             letter-spacing: 1px;
-            transition: all 0.3s;
         }
 
-        .gift-button:hover:not(:disabled) {
+        .gift-button:hover {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+            color: var(--marsala);
             transform: scale(1.05);
-            box-shadow: 0 5px 20px rgba(139, 38, 53, 0.4);
         }
 
         .gift-button:disabled {
             background: var(--gray-light);
             cursor: not-allowed;
-            border-color: var(--gray-light);
+            border-color: var(--charcoal);
         }
 
         .pix-section {
-            background: linear-gradient(135deg, var(--cream) 0%, var(--blush) 100%);
-            border: 3px solid var(--gold);
+            background: linear-gradient(135deg, var(--cream) 0%, var(--gold-light) 100%);
             border-radius: 20px;
             padding: 40px;
             text-align: center;
             margin-top: 60px;
+            border: 3px solid var(--gold);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
 
         .pix-section h2 {
             font-family: 'Playfair Display', serif;
-            font-size: 36px;
             color: var(--marsala);
-            margin-bottom: 20px;
+            font-size: 32px;
+            margin-bottom: 15px;
         }
 
         .pix-section p {
-            font-size: 18px;
             color: var(--charcoal);
-            margin-bottom: 30px;
+            font-size: 18px;
+            margin-bottom: 20px;
         }
 
         .pix-info {
             background: white;
             padding: 30px;
             border-radius: 15px;
-            display: inline-block;
-            border: 2px solid var(--rose-gold);
+            max-width: 500px;
+            margin: 20px auto;
+            border: 2px solid var(--marsala);
         }
 
         .pix-key {
             font-size: 24px;
-            color: var(--marsala);
             font-weight: bold;
-            margin: 15px 0;
+            color: var(--marsala);
+            margin: 10px 0;
+            padding: 15px;
+            background: var(--blush);
+            border-radius: 10px;
         }
 
         .copy-button {
-            background: linear-gradient(135deg, var(--marsala) 0%, var(--marsala-dark) 100%);
+            margin-top: 20px;
+            padding: 12px 30px;
+            background: var(--marsala);
             color: var(--gold);
             border: 2px solid var(--gold);
-            padding: 12px 30px;
             border-radius: 50px;
             cursor: pointer;
             font-size: 16px;
-            font-weight: 500;
-            margin-top: 15px;
+            font-weight: 600;
             transition: all 0.3s;
         }
 
         .copy-button:hover {
+            background: var(--gold);
+            color: var(--marsala);
             transform: scale(1.05);
         }
 
-        /* Modal */
+        /* Modal Styles */
         .modal {
+            display: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            z-index: 2000;
-            display: none;
-            justify-content: center;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
             align-items: center;
+            justify-content: center;
         }
 
         .modal.show {
@@ -313,7 +349,19 @@
             width: 90%;
             text-align: center;
             border: 3px solid var(--gold);
-            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            animation: modalAppear 0.3s ease;
+        }
+
+        @keyframes modalAppear {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
 
         .modal-title {
@@ -326,49 +374,99 @@
         .modal-text {
             font-size: 18px;
             color: var(--charcoal);
-            margin-bottom: 15px;
+            margin-bottom: 25px;
             line-height: 1.6;
+            white-space: pre-line;
         }
 
         .modal-input {
             width: 100%;
             padding: 15px;
-            border: 2px solid var(--rose-gold);
+            border: 2px solid var(--marsala);
             border-radius: 10px;
             font-size: 16px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             font-family: 'Poppins', sans-serif;
+        }
+
+        .modal-input:focus {
+            outline: none;
+            border-color: var(--gold);
         }
 
         .modal-buttons {
             display: flex;
-            gap: 10px;
+            gap: 15px;
             justify-content: center;
+            flex-wrap: wrap;
         }
 
         .modal-btn {
             padding: 12px 30px;
-            background: linear-gradient(135deg, var(--marsala) 0%, var(--marsala-dark) 100%);
+            background: var(--marsala);
             color: var(--gold);
             border: 2px solid var(--gold);
             border-radius: 50px;
             cursor: pointer;
             font-size: 16px;
-            font-weight: 500;
-            text-transform: uppercase;
+            font-weight: 600;
             transition: all 0.3s;
         }
 
         .modal-btn:hover {
+            background: var(--gold);
+            color: var(--marsala);
             transform: scale(1.05);
         }
 
         .modal-btn.cancel {
             background: var(--gray-light);
-            border-color: var(--gray-light);
             color: white;
+            border-color: var(--charcoal);
         }
 
+        .modal-btn.cancel:hover {
+            background: var(--charcoal);
+        }
+
+        /* Report Modal */
+        .report-modal .modal-content {
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .report-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .report-table th,
+        .report-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--blush);
+        }
+
+        .report-table th {
+            background: var(--marsala);
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .report-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .report-table tr:hover {
+            background: var(--blush);
+        }
+
+        /* Animations */
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -391,42 +489,54 @@
             }
         }
 
+        /* Responsive */
         @media (max-width: 768px) {
             .header h1 {
                 font-size: 48px;
+            }
+
+            .header p {
+                font-size: 16px;
+            }
+
+            .category-title {
+                font-size: 24px;
             }
 
             .gifts-grid {
                 grid-template-columns: 1fr;
             }
 
-            .back-button {
-                position: relative;
-                margin-bottom: 20px;
-                top: 0;
-                left: 0;
-            }
-
-            .category-title {
-                font-size: 28px;
+            .back-button,
+            .admin-button {
+                position: static;
+                margin: 10px auto;
+                display: flex;
             }
 
             .pix-section {
-                padding: 30px 20px;
+                padding: 20px;
+            }
+
+            .modal-content {
+                padding: 20px;
             }
         }
     </style>
 </head>
 <body>
-    <a href="index.html" class="back-button">
-        <i class="fas fa-arrow-left"></i> Voltar ao Convite
-    </a>
-
     <div class="container">
+        <a href="index.html" class="back-button">
+            <i class="fas fa-arrow-left"></i> Voltar
+        </a>
+
+        <button class="admin-button" onclick="showReport()">
+            <i class="fas fa-file-alt"></i> Ver Relatório
+        </button>
+
         <div class="header">
             <h1>Lista de Presentes</h1>
-            <p>💕 Sua presença é nosso maior presente! 💕</p>
-            <p>Mas se quiser nos ajudar a montar nosso lar com carinho,<br>escolha um item abaixo:</p>
+            <p>Escolha um presente e nos ajude a mobiliar nosso novo lar com muito amor! 💕</p>
         </div>
 
         <!-- Cozinha -->
@@ -435,36 +545,36 @@
             <div class="gifts-grid">
                 <div class="gift-card" data-id="1">
                     <div class="gift-image">
-                        <img src="https://images.unsplash.com/photo-1585515320310-259814833e62?w=500&h=500&fit=crop" alt="Liquidificador">
+                        <img src="https://images.unsplash.com/photo-1585515320310-259814833251?w=500&h=500&fit=crop" alt="Jogo de Panelas">
                     </div>
                     <div class="gift-content">
-                        <h3 class="gift-name">Liquidificador</h3>
-                        <p class="gift-description">Liquidificador potente para vitaminas e receitas deliciosas</p>
-                        <p class="gift-price">R$ 250,00</p>
+                        <h3 class="gift-name">Jogo de Panelas Antiaderente</h3>
+                        <p class="gift-description">5 peças com revestimento cerâmico</p>
+                        <p class="gift-price">R$ 350,00</p>
                         <button class="gift-button" onclick="reserveGift(1)">Presentear</button>
                     </div>
                 </div>
 
                 <div class="gift-card" data-id="2">
                     <div class="gift-image">
-                        <img src="https://images.unsplash.com/photo-1584990347449-39e4518c152a?w=500&h=500&fit=crop" alt="Jogo de Panelas">
+                        <img src="https://images.unsplash.com/photo-1556911220-bff31c812dba?w=500&h=500&fit=crop" alt="Liquidificador">
                     </div>
                     <div class="gift-content">
-                        <h3 class="gift-name">Jogo de Panelas</h3>
-                        <p class="gift-description">Conjunto completo com 5 panelas antiaderentes</p>
-                        <p class="gift-price">R$ 450,00</p>
+                        <h3 class="gift-name">Liquidificador Potente</h3>
+                        <p class="gift-description">1200W com 12 velocidades</p>
+                        <p class="gift-price">R$ 280,00</p>
                         <button class="gift-button" onclick="reserveGift(2)">Presentear</button>
                     </div>
                 </div>
 
                 <div class="gift-card" data-id="3">
                     <div class="gift-image">
-                        <img src="https://images.unsplash.com/photo-1593618998160-e34014e67546?w=500&h=500&fit=crop" alt="Jogo de Facas">
+                        <img src="https://images.unsplash.com/photo-1585659722983-3a675dabf23d?w=500&h=500&fit=crop" alt="Airfryer">
                     </div>
                     <div class="gift-content">
-                        <h3 class="gift-name">Jogo de Facas</h3>
-                        <p class="gift-description">Kit com 6 facas profissionais e suporte</p>
-                        <p class="gift-price">R$ 180,00</p>
+                        <h3 class="gift-name">Airfryer</h3>
+                        <p class="gift-description">Fritadeira elétrica 4L</p>
+                        <p class="gift-price">R$ 450,00</p>
                         <button class="gift-button" onclick="reserveGift(3)">Presentear</button>
                     </div>
                 </div>
@@ -474,33 +584,33 @@
                         <img src="https://images.unsplash.com/photo-1517668808822-9ebb02f2a0e6?w=500&h=500&fit=crop" alt="Cafeteira">
                     </div>
                     <div class="gift-content">
-                        <h3 class="gift-name">Cafeteira Elétrica</h3>
-                        <p class="gift-description">Para começar o dia com energia</p>
-                        <p class="gift-price">R$ 200,00</p>
+                        <h3 class="gift-name">Cafeteira Expresso</h3>
+                        <p class="gift-description">Máquina de café profissional</p>
+                        <p class="gift-price">R$ 520,00</p>
                         <button class="gift-button" onclick="reserveGift(4)">Presentear</button>
                     </div>
                 </div>
 
                 <div class="gift-card" data-id="5">
                     <div class="gift-image">
-                        <img src="https://images.unsplash.com/photo-1610701596007-11502861dcfa?w=500&h=500&fit=crop" alt="Jogo de Potes">
+                        <img src="https://images.unsplash.com/photo-1610701596007-11502861dcfa?w=500&h=500&fit=crop" alt="Mixer">
                     </div>
                     <div class="gift-content">
-                        <h3 class="gift-name">Jogo de Potes</h3>
-                        <p class="gift-description">10 potes de vidro para organização</p>
-                        <p class="gift-price">R$ 120,00</p>
+                        <h3 class="gift-name">Batedeira Planetária</h3>
+                        <p class="gift-description">Com tigela de inox 5L</p>
+                        <p class="gift-price">R$ 680,00</p>
                         <button class="gift-button" onclick="reserveGift(5)">Presentear</button>
                     </div>
                 </div>
 
                 <div class="gift-card" data-id="6">
                     <div class="gift-image">
-                        <img src="https://images.unsplash.com/photo-1574269909862-7e1d70bb8078?w=500&h=500&fit=crop" alt="Micro-ondas">
+                        <img src="https://images.unsplash.com/photo-1585515320310-259814833251?w=500&h=500&fit=crop" alt="Jogo de Facas">
                     </div>
                     <div class="gift-content">
-                        <h3 class="gift-name">Micro-ondas</h3>
-                        <p class="gift-description">30 litros com grill e timer digital</p>
-                        <p class="gift-price">R$ 550,00</p>
+                        <h3 class="gift-name">Jogo de Facas Profissional</h3>
+                        <p class="gift-description">6 peças em aço inox</p>
+                        <p class="gift-price">R$ 250,00</p>
                         <button class="gift-button" onclick="reserveGift(6)">Presentear</button>
                     </div>
                 </div>
@@ -509,52 +619,52 @@
 
         <!-- Mesa e Jantar -->
         <div class="category-section">
-            <h2 class="category-title"><i class="fas fa-plate-wheat"></i> Mesa & Jantar</h2>
+            <h2 class="category-title"><i class="fas fa-glass-cheers"></i> Mesa e Jantar</h2>
             <div class="gifts-grid">
                 <div class="gift-card" data-id="7">
                     <div class="gift-image">
-                        <img src="https://images.unsplash.com/photo-1578475691717-7ced1e5385c1?w=500&h=500&fit=crop" alt="Aparelho de Jantar">
+                        <img src="https://images.unsplash.com/photo-1578500494198-246f612d3b3d?w=500&h=500&fit=crop" alt="Aparelho de Jantar">
                     </div>
                     <div class="gift-content">
                         <h3 class="gift-name">Aparelho de Jantar</h3>
-                        <p class="gift-description">Conjunto completo para 6 pessoas - 30 peças</p>
-                        <p class="gift-price">R$ 380,00</p>
+                        <p class="gift-description">30 peças em porcelana</p>
+                        <p class="gift-price">R$ 420,00</p>
                         <button class="gift-button" onclick="reserveGift(7)">Presentear</button>
                     </div>
                 </div>
 
                 <div class="gift-card" data-id="8">
                     <div class="gift-image">
-                        <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=500&h=500&fit=crop" alt="Jogo de Taças">
+                        <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=500&h=500&fit=crop" alt="Taças">
                     </div>
                     <div class="gift-content">
                         <h3 class="gift-name">Jogo de Taças</h3>
-                        <p class="gift-description">12 taças de cristal (vinho, água e champagne)</p>
-                        <p class="gift-price">R$ 280,00</p>
+                        <p class="gift-description">12 taças de cristal para vinho</p>
+                        <p class="gift-price">R$ 180,00</p>
                         <button class="gift-button" onclick="reserveGift(8)">Presentear</button>
                     </div>
                 </div>
 
                 <div class="gift-card" data-id="9">
                     <div class="gift-image">
-                        <img src="https://images.unsplash.com/photo-1606676539940-12768ce0e762?w=500&h=500&fit=crop" alt="Faqueiro">
+                        <img src="https://images.unsplash.com/photo-1584622781867-1229b4e5b8f0?w=500&h=500&fit=crop" alt="Jogo de Copos">
                     </div>
                     <div class="gift-content">
-                        <h3 class="gift-name">Faqueiro</h3>
-                        <p class="gift-description">Conjunto 42 peças em aço inox</p>
-                        <p class="gift-price">R$ 320,00</p>
+                        <h3 class="gift-name">Jogo de Copos</h3>
+                        <p class="gift-description">12 copos de vidro variados</p>
+                        <p class="gift-price">R$ 120,00</p>
                         <button class="gift-button" onclick="reserveGift(9)">Presentear</button>
                     </div>
                 </div>
 
                 <div class="gift-card" data-id="10">
                     <div class="gift-image">
-                        <img src="https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=500&h=500&fit=crop" alt="Jogo de Xícaras">
+                        <img src="https://images.unsplash.com/photo-1578500494198-246f612d3b3d?w=500&h=500&fit=crop" alt="Talheres">
                     </div>
                     <div class="gift-content">
-                        <h3 class="gift-name">Jogo de Xícaras</h3>
-                        <p class="gift-description">12 xícaras de porcelana com pires</p>
-                        <p class="gift-price">R$ 150,00</p>
+                        <h3 class="gift-name">Faqueiro Completo</h3>
+                        <p class="gift-description">42 peças em aço inox</p>
+                        <p class="gift-price">R$ 320,00</p>
                         <button class="gift-button" onclick="reserveGift(10)">Presentear</button>
                     </div>
                 </div>
@@ -567,11 +677,11 @@
             <div class="gifts-grid">
                 <div class="gift-card" data-id="11">
                     <div class="gift-image">
-                        <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=500&h=500&fit=crop" alt="Jogo de Lençóis">
+                        <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=500&h=500&fit=crop" alt="Jogo de Cama">
                     </div>
                     <div class="gift-content">
-                        <h3 class="gift-name">Jogo de Lençóis</h3>
-                        <p class="gift-description">Casal, 300 fios, 4 peças</p>
+                        <h3 class="gift-name">Jogo de Cama Casal</h3>
+                        <p class="gift-description">Lençol king 300 fios egípcios</p>
                         <p class="gift-price">R$ 280,00</p>
                         <button class="gift-button" onclick="reserveGift(11)">Presentear</button>
                     </div>
@@ -582,33 +692,33 @@
                         <img src="https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=500&h=500&fit=crop" alt="Edredom">
                     </div>
                     <div class="gift-content">
-                        <h3 class="gift-name">Edredom Casal</h3>
-                        <p class="gift-description">Edredom de plumas king size</p>
-                        <p class="gift-price">R$ 420,00</p>
+                        <h3 class="gift-name">Edredom King</h3>
+                        <p class="gift-description">Edredom dupla face com porta travesseiros</p>
+                        <p class="gift-price">R$ 350,00</p>
                         <button class="gift-button" onclick="reserveGift(12)">Presentear</button>
                     </div>
                 </div>
 
                 <div class="gift-card" data-id="13">
                     <div class="gift-image">
-                        <img src="https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=500&h=500&fit=crop" alt="Almofadas">
+                        <img src="https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=500&h=500&fit=crop" alt="Travesseiros">
                     </div>
                     <div class="gift-content">
-                        <h3 class="gift-name">Jogo de Almofadas</h3>
-                        <p class="gift-description">4 almofadas decorativas</p>
-                        <p class="gift-price">R$ 180,00</p>
+                        <h3 class="gift-name">Travesseiros Premium</h3>
+                        <p class="gift-description">Par de travesseiros viscoelásticos</p>
+                        <p class="gift-price">R$ 240,00</p>
                         <button class="gift-button" onclick="reserveGift(13)">Presentear</button>
                     </div>
                 </div>
 
                 <div class="gift-card" data-id="14">
                     <div class="gift-image">
-                        <img src="https://images.unsplash.com/photo-1509048191080-d2984bad6ae5?w=500&h=500&fit=crop" alt="Despertador">
+                        <img src="https://images.unsplash.com/photo-1631049035182-249067d7618e?w=500&h=500&fit=crop" alt="Cortinas">
                     </div>
                     <div class="gift-content">
-                        <h3 class="gift-name">Despertador Digital</h3>
-                        <p class="gift-description">Com bluetooth e carregador wireless</p>
-                        <p class="gift-price">R$ 150,00</p>
+                        <h3 class="gift-name">Cortinas Blackout</h3>
+                        <p class="gift-description">Par de cortinas 2,00m x 2,50m</p>
+                        <p class="gift-price">R$ 380,00</p>
                         <button class="gift-button" onclick="reserveGift(14)">Presentear</button>
                     </div>
                 </div>
@@ -621,66 +731,66 @@
             <div class="gifts-grid">
                 <div class="gift-card" data-id="15">
                     <div class="gift-image">
-                        <img src="https://images.unsplash.com/photo-1620062278173-34a99d711b5b?w=500&h=500&fit=crop" alt="Jogo de Toalhas">
+                        <img src="https://images.unsplash.com/photo-1631889993959-41b4e9c6e3c5?w=500&h=500&fit=crop" alt="Jogo de Toalhas">
                     </div>
                     <div class="gift-content">
-                        <h3 class="gift-name">Jogo de Toalhas</h3>
-                        <p class="gift-description">6 peças em algodão egípcio</p>
-                        <p class="gift-price">R$ 280,00</p>
+                        <h3 class="gift-name">Jogo de Toalhas Banho</h3>
+                        <p class="gift-description">5 peças 100% algodão egípcio</p>
+                        <p class="gift-price">R$ 220,00</p>
                         <button class="gift-button" onclick="reserveGift(15)">Presentear</button>
                     </div>
                 </div>
 
                 <div class="gift-card" data-id="16">
                     <div class="gift-image">
-                        <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=500&h=500&fit=crop" alt="Jogo de Banheiro">
+                        <img src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=500&h=500&fit=crop" alt="Tapete de Banheiro">
                     </div>
                     <div class="gift-content">
-                        <h3 class="gift-name">Jogo de Banheiro</h3>
-                        <p class="gift-description">5 peças com tapetes e acessórios</p>
-                        <p class="gift-price">R$ 180,00</p>
+                        <h3 class="gift-name">Tapete de Banheiro</h3>
+                        <p class="gift-description">Conjunto 3 peças antiderrapante</p>
+                        <p class="gift-price">R$ 150,00</p>
                         <button class="gift-button" onclick="reserveGift(16)">Presentear</button>
                     </div>
                 </div>
 
                 <div class="gift-card" data-id="17">
                     <div class="gift-image">
-                        <img src="https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=500&h=500&fit=crop" alt="Kit Acessórios">
+                        <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=500&h=500&fit=crop" alt="Roupão">
                     </div>
                     <div class="gift-content">
-                        <h3 class="gift-name">Kit Acessórios</h3>
-                        <p class="gift-description">Saboneteira, porta-escova, dispenser</p>
-                        <p class="gift-price">R$ 120,00</p>
+                        <h3 class="gift-name">Roupões de Banho</h3>
+                        <p class="gift-description">Par de roupões personalizados</p>
+                        <p class="gift-price">R$ 280,00</p>
                         <button class="gift-button" onclick="reserveGift(17)">Presentear</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Eletrodomésticos -->
+        <!-- Eletrônicos e Eletrodomésticos -->
         <div class="category-section">
-            <h2 class="category-title"><i class="fas fa-plug"></i> Eletrodomésticos</h2>
+            <h2 class="category-title"><i class="fas fa-tv"></i> Eletrônicos</h2>
             <div class="gifts-grid">
                 <div class="gift-card" data-id="18">
                     <div class="gift-image">
-                        <img src="https://images.unsplash.com/photo-1604902396830-aca29e19b067?w=500&h=500&fit=crop" alt="Ventilador">
+                        <img src="https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=500&h=500&fit=crop" alt="Smart TV">
                     </div>
                     <div class="gift-content">
-                        <h3 class="gift-name">Ventilador</h3>
-                        <p class="gift-description">Ventilador de coluna 50cm com controle</p>
-                        <p class="gift-price">R$ 280,00</p>
+                        <h3 class="gift-name">Smart TV 50"</h3>
+                        <p class="gift-description">4K UHD com sistema Android</p>
+                        <p class="gift-price">R$ 1.800,00</p>
                         <button class="gift-button" onclick="reserveGift(18)">Presentear</button>
                     </div>
                 </div>
 
                 <div class="gift-card" data-id="19">
                     <div class="gift-image">
-                        <img src="https://images.unsplash.com/photo-1582735689369-4fe89db7114c?w=500&h=500&fit=crop" alt="Ferro de Passar">
+                        <img src="https://images.unsplash.com/photo-1603732551681-b7d447f39c29?w=500&h=500&fit=crop" alt="Micro-ondas">
                     </div>
                     <div class="gift-content">
-                        <h3 class="gift-name">Ferro de Passar</h3>
-                        <p class="gift-description">Ferro a vapor com base de cerâmica</p>
-                        <p class="gift-price">R$ 180,00</p>
+                        <h3 class="gift-name">Micro-ondas</h3>
+                        <p class="gift-description">30L com grill e receitas automáticas</p>
+                        <p class="gift-price">R$ 480,00</p>
                         <button class="gift-button" onclick="reserveGift(19)">Presentear</button>
                     </div>
                 </div>
@@ -770,8 +880,8 @@
             <h2>💳 Prefere contribuir via PIX?</h2>
             <p>Qualquer valor será muito bem-vindo e usado com carinho para nosso lar!</p>
             <div class="pix-info">
-                <p><strong>Chave PIX (Telefone):</strong></p>
-                <p class="pix-key" id="pixKey">(98) 98888-8888</p>
+                <p><strong>Chave PIX (E-mail):</strong></p>
+                <p class="pix-key" id="pixKey">leoalmeidasa@gmail.com</p>
                 <p><strong>Nome:</strong> Camylle & Leonardo</p>
                 <button class="copy-button" onclick="copyPix()">
                     <i class="fas fa-copy"></i> Copiar Chave PIX
@@ -780,15 +890,30 @@
         </div>
     </div>
 
-    <!-- Modal -->
+    <!-- Modal de Confirmação -->
     <div class="modal" id="modal">
         <div class="modal-content">
             <h3 class="modal-title" id="modalTitle">Confirmar Presente</h3>
-            <p class="modal-text" id="modalText">Por favor, informe seu nome para confirmar o presente:</p>
+            <p class="modal-text" id="modalText">Por favor, informe seus dados para confirmar o presente:</p>
             <input type="text" class="modal-input" id="guestName" placeholder="Seu nome completo">
+            <input type="tel" class="modal-input" id="guestContact" placeholder="Telefone/WhatsApp (com DDD)">
             <div class="modal-buttons">
                 <button class="modal-btn" onclick="confirmReservation()">Confirmar</button>
                 <button class="modal-btn cancel" onclick="closeModal()">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Relatório -->
+    <div class="modal report-modal" id="reportModal">
+        <div class="modal-content">
+            <h3 class="modal-title">📋 Relatório de Presentes Reservados</h3>
+            <div id="reportContent"></div>
+            <div class="modal-buttons">
+                <button class="modal-btn" onclick="downloadReport()">
+                    <i class="fas fa-download"></i> Baixar Relatório
+                </button>
+                <button class="modal-btn cancel" onclick="closeReportModal()">Fechar</button>
             </div>
         </div>
     </div>
@@ -807,6 +932,7 @@
                 const card = document.querySelector(`[data-id="${giftId}"]`);
                 if (card) {
                     card.classList.add('reserved');
+                    card.classList.add('hidden'); // Ocultar item reservado
                     const button = card.querySelector('.gift-button');
                     button.disabled = true;
                     button.textContent = 'Já Reservado';
@@ -822,29 +948,44 @@
             const giftName = card.querySelector('.gift-name').textContent;
             
             document.getElementById('modalTitle').textContent = '🎁 Presentear';
-            document.getElementById('modalText').textContent = `Você escolheu: ${giftName}\n\nPor favor, informe seu nome para confirmar:`;
+            document.getElementById('modalText').textContent = `Você escolheu: ${giftName}\n\nPor favor, informe seus dados para confirmar:`;
             document.getElementById('guestName').value = '';
+            document.getElementById('guestContact').value = '';
             document.getElementById('modal').classList.add('show');
         }
 
         function confirmReservation() {
             const guestName = document.getElementById('guestName').value.trim();
+            const guestContact = document.getElementById('guestContact').value.trim();
             
             if (!guestName) {
                 alert('Por favor, informe seu nome!');
                 return;
             }
 
-            // Save reservation
+            if (!guestContact) {
+                alert('Por favor, informe seu telefone/WhatsApp!');
+                return;
+            }
+
+            // Get gift details
+            const card = document.querySelector(`[data-id="${currentGiftId}"]`);
+            const giftName = card.querySelector('.gift-name').textContent;
+            const giftPrice = card.querySelector('.gift-price').textContent;
+
+            // Save reservation with contact
             reservedGifts[currentGiftId] = {
                 guest: guestName,
+                contact: guestContact,
+                giftName: giftName,
+                giftPrice: giftPrice,
                 date: new Date().toISOString()
             };
             localStorage.setItem('reservedGifts', JSON.stringify(reservedGifts));
 
-            // Update card
-            const card = document.querySelector(`[data-id="${currentGiftId}"]`);
+            // Update card - hide it
             card.classList.add('reserved');
+            card.classList.add('hidden');
             const button = card.querySelector('.gift-button');
             button.disabled = true;
             button.textContent = 'Já Reservado';
@@ -854,12 +995,17 @@
             // Show success message
             document.getElementById('modalTitle').textContent = '✅ Presente Reservado!';
             document.getElementById('modalText').textContent = `Obrigado, ${guestName}!\n\nSeu presente foi reservado com sucesso.\nEstamos muito felizes com sua generosidade! 💕`;
-            document.querySelector('.modal-input').style.display = 'none';
+            
+            // Hide inputs and change buttons
+            const inputs = document.querySelectorAll('.modal-input');
+            inputs.forEach(input => input.style.display = 'none');
+            
             document.querySelector('.modal-buttons').innerHTML = '<button class="modal-btn" onclick="closeModal()">Fechar</button>';
             document.getElementById('modal').classList.add('show');
             
             setTimeout(() => {
-                document.querySelector('.modal-input').style.display = 'block';
+                // Reset form for next use
+                inputs.forEach(input => input.style.display = 'block');
                 document.querySelector('.modal-buttons').innerHTML = `
                     <button class="modal-btn" onclick="confirmReservation()">Confirmar</button>
                     <button class="modal-btn cancel" onclick="closeModal()">Cancelar</button>
@@ -870,6 +1016,90 @@
         function closeModal() {
             document.getElementById('modal').classList.remove('show');
             currentGiftId = null;
+        }
+
+        function showReport() {
+            const reportContent = document.getElementById('reportContent');
+            
+            if (Object.keys(reservedGifts).length === 0) {
+                reportContent.innerHTML = '<p class="modal-text">Nenhum presente foi reservado ainda.</p>';
+            } else {
+                let tableHTML = `
+                    <table class="report-table">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Contato</th>
+                                <th>Presente</th>
+                                <th>Valor</th>
+                                <th>Data</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                `;
+
+                Object.values(reservedGifts).forEach(reservation => {
+                    const date = new Date(reservation.date);
+                    const formattedDate = date.toLocaleDateString('pt-BR');
+                    const formattedTime = date.toLocaleTimeString('pt-BR');
+                    
+                    tableHTML += `
+                        <tr>
+                            <td>${reservation.guest}</td>
+                            <td>${reservation.contact}</td>
+                            <td>${reservation.giftName}</td>
+                            <td>${reservation.giftPrice}</td>
+                            <td>${formattedDate} ${formattedTime}</td>
+                        </tr>
+                    `;
+                });
+
+                tableHTML += '</tbody></table>';
+                reportContent.innerHTML = tableHTML;
+            }
+
+            document.getElementById('reportModal').classList.add('show');
+        }
+
+        function closeReportModal() {
+            document.getElementById('reportModal').classList.remove('show');
+        }
+
+        function downloadReport() {
+            if (Object.keys(reservedGifts).length === 0) {
+                alert('Nenhum presente foi reservado ainda.');
+                return;
+            }
+
+            let reportText = 'RELATÓRIO DE PRESENTES RESERVADOS\n';
+            reportText += 'Camylle & Leonardo - Chá de Casa Nova\n';
+            reportText += '='.repeat(80) + '\n\n';
+
+            Object.values(reservedGifts).forEach((reservation, index) => {
+                const date = new Date(reservation.date);
+                const formattedDate = date.toLocaleDateString('pt-BR');
+                const formattedTime = date.toLocaleTimeString('pt-BR');
+                
+                reportText += `${index + 1}. ${reservation.guest}\n`;
+                reportText += `   Contato: ${reservation.contact}\n`;
+                reportText += `   Presente: ${reservation.giftName}\n`;
+                reportText += `   Valor: ${reservation.giftPrice}\n`;
+                reportText += `   Data: ${formattedDate} às ${formattedTime}\n`;
+                reportText += '-'.repeat(80) + '\n\n';
+            });
+
+            reportText += `\nTotal de presentes reservados: ${Object.keys(reservedGifts).length}\n`;
+
+            // Create blob and download
+            const blob = new Blob([reportText], { type: 'text/plain;charset=utf-8' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `relatorio-presentes-${new Date().toISOString().split('T')[0]}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
         }
 
         function copyPix() {
@@ -884,10 +1114,16 @@
             });
         }
 
-        // Close modal when clicking outside
+        // Close modals when clicking outside
         document.getElementById('modal').addEventListener('click', (e) => {
             if (e.target.id === 'modal') {
                 closeModal();
+            }
+        });
+
+        document.getElementById('reportModal').addEventListener('click', (e) => {
+            if (e.target.id === 'reportModal') {
+                closeReportModal();
             }
         });
     </script>
